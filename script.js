@@ -24,11 +24,39 @@ $("#form1").submit(function (e) {
     $("#endereco").val("");
     console.log(resultado);
     console.log(data);
+    $(".box_comment").html("");
     getComments();
   });
 });
 function deletar(id) {
+  $.ajax({
+    url: "https://localhost/projeto_agenda/deletar.php",
+    method: "POST",
+    data: {
+      ids: id,
+    },
+    dataType: "json",
+  }).done(function (resultado, data) {
+    console.log(resultado);
+    console.log("resultado do deletar " + data);
+    getComments();
+  });
+
   console.log("eu fui apertado meu id é : " + id);
+}
+function exibirvazio() {
+  $.ajax({
+    url: "https://localhost/projeto_agenda/exibir.php",
+    method: "GET",
+    dataType: "json",
+  }).done(function (resultado) {
+    console.log(resultado);
+    if (resultado === "Nenhum comentário encontrado") {
+      $(".box_comment").html('<div class="b_comm"><h4>' + resultado + "</h4>");
+    } else {
+      $(".box_comment").html("");
+    }
+  });
 }
 
 function getComments() {
@@ -40,9 +68,7 @@ function getComments() {
   }).done(function (resultado) {
     console.log(resultado);
     if (resultado === "Nenhum comentário encontrado") {
-      $(".box_comment").prepend(
-        '<div class="b_comm"><h4>' + resultado + "</h4>"
-      );
+      $(".box_comment").html('<div class="b_comm"><h4>' + resultado + "</h4>");
     } else {
       for (var i = 0; i < resultado.length; i++) {
         $(".box_comment").prepend(
@@ -72,46 +98,3 @@ function getComments() {
 }
 
 getComments();
-/*
-$("#form1").submit(function (e) {
-  e.preventDefault();
-
-  var u_name = $("#name").val();
-  var u_comment = $("#comment").val();
-
-  //console.log(u_name, u_comment);
-  $.ajax({
-    url: "http://localhost/PROJS/VIDEO_AULAS/SERIE/03_AJAX_e_PHP/inserir.php",
-    method: "POST",
-    data: { name: u_name, comment: u_comment },
-    dataType: "json",
-  }).done(function (result) {
-    $("#name").val("");
-    $("#comment").val("");
-    console.log(result);
-    getComments();
-  });
-});
-
-function getComments() {
-  $.ajax({
-    url: "http://localhost/PROJS/VIDEO_AULAS/SERIE/03_AJAX_e_PHP/selecionar.php",
-    method: "GET",
-    dataType: "json",
-  }).done(function (result) {
-    console.log(result);
-
-    for (var i = 0; i < result.length; i++) {
-      $(".box_comment").prepend(
-        '<div class="b_comm"><h4>' +
-          result[i].name +
-          "</h4><p>" +
-          result[i].comment +
-          "</p></div>"
-      );
-    }
-  });
-}
-
-getComments();
-*/
