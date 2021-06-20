@@ -39,7 +39,7 @@ function deletar(id) {
   }).done(function (resultado, data) {
     console.log(resultado);
     console.log("resultado do deletar " + data);
-    getComments();
+    exibirvazio();
   });
 
   console.log("eu fui apertado meu id é : " + id);
@@ -54,7 +54,29 @@ function exibirvazio() {
     if (resultado === "Nenhum comentário encontrado") {
       $(".box_comment").html('<div class="b_comm"><h4>' + resultado + "</h4>");
     } else {
-      $(".box_comment").html("");
+      for (var i = 0; i < resultado.length; i++) {
+        $(".box_comment").html(
+          '<div class="b_comm"><h4>' +
+            "Nome" +
+            "</h4><p>" +
+            resultado[i].nome +
+            "</p> <h4 >" +
+            " Telefone </h4><p>" +
+            resultado[i].telefone +
+            "</p> " +
+            " <h4 >" +
+            " Email </h4><p>" +
+            resultado[i].email +
+            "</p>" +
+            "<h4 >" +
+            "endereco </h4><p>" +
+            resultado[i].endereco +
+            "</p> " +
+            " <button onclick = 'deletar(" +
+            resultado[i].id +
+            ")' style= 'width:70px ; border-radius: 10px'> deletar </button> </div>"
+        );
+      }
     }
   });
 }
