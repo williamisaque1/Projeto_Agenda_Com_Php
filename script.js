@@ -1,8 +1,5 @@
 $("#form1").submit(function (e) {
   e.preventDefault();
-  //console.log($_post["nome"]);
-  // console.log($("#nome").val() + "ghhh");
-
   var nome = $("#nome").val();
   var telefone = $("#tel").val();
   var email = $("#email").val();
@@ -20,14 +17,14 @@ $("#form1").submit(function (e) {
       endereco: endereco,
     },
     dataType: "json",
-  }).done(function (resposta /*data*/) {
+  }).done(function (resultado, data) {
     $("#nome").val("");
     $("#tel").val("");
     $("#email").val("");
     $("#endereco").val("");
-    console.log(resposta);
+    console.log(resultado);
+    console.log(data);
     getComments();
-    //console.log(data);
   });
 });
 function deletar(id) {
@@ -42,29 +39,34 @@ function getComments() {
     dataType: "json",
   }).done(function (resultado) {
     console.log(resultado);
-
-    for (var i = 0; i < resultado.length; i++) {
+    if (resultado === "Nenhum comentário encontrado") {
       $(".box_comment").prepend(
-        '<div class="b_comm"><h4>' +
-          "Nome" +
-          "</h4><p>" +
-          resultado[i].nome +
-          "</p> <h4 >" +
-          " Telefone </h4><p>" +
-          resultado[i].telefone +
-          "</p> " +
-          " <h4 >" +
-          " Email </h4><p>" +
-          resultado[i].email +
-          "</p>" +
-          "<h4 >" +
-          "endereco </h4><p>" +
-          resultado[i].endereco +
-          "</p> " +
-          " <button onclick = 'deletar(" +
-          resultado[i].id +
-          ")' style= 'width:70px ; border-radius: 10px'> deletar </button> </div>"
+        '<div class="b_comm"><h4>' + resultado + "</h4>"
       );
+    } else {
+      for (var i = 0; i < resultado.length; i++) {
+        $(".box_comment").prepend(
+          '<div class="b_comm"><h4>' +
+            "Nome" +
+            "</h4><p>" +
+            resultado[i].nome +
+            "</p> <h4 >" +
+            " Telefone </h4><p>" +
+            resultado[i].telefone +
+            "</p> " +
+            " <h4 >" +
+            " Email </h4><p>" +
+            resultado[i].email +
+            "</p>" +
+            "<h4 >" +
+            "endereco </h4><p>" +
+            resultado[i].endereco +
+            "</p> " +
+            " <button onclick = 'deletar(" +
+            resultado[i].id +
+            ")' style= 'width:70px ; border-radius: 10px'> deletar </button> </div>"
+        );
+      }
     }
   });
 }
