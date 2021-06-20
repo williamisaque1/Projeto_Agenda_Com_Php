@@ -3,26 +3,36 @@ $("#form1").submit(function (e) {
   //console.log($_post["nome"]);
   // console.log($("#nome").val() + "ghhh");
 
-  var $nome = $("#nome").val();
-  var $telefone = $("#tel").val();
-  var $email = $("#email").val();
-  var $endereco = $("#endereco").val();
+  var nome = $("#nome").val();
+  var telefone = $("#tel").val();
+  var email = $("#email").val();
+  var endereco = $("#endereco").val();
+  /*console.log(
+    "resultado " + $nome + " " + $telefone + " " + $email + " " + $endereco
+  );*/
   $.ajax({
-    url: " https://localhost/projeto_agenda/adicionar.php",
-
+    url: "https://localhost/projeto_agenda/adicionar.php",
     method: "POST",
     data: {
-      nome: $nome,
-      telefone: $telefone,
-      email: $email,
-      endereco: $endereco,
+      nome: nome,
+      telefone: telefone,
+      email: email,
+      endereco: endereco,
     },
     dataType: "json",
   }).done(function (resposta /*data*/) {
+    $("#nome").val("");
+    $("#tel").val("");
+    $("#email").val("");
+    $("#endereco").val("");
     console.log(resposta);
+    getComments();
     //console.log(data);
   });
 });
+function deletar(id) {
+  console.log("eu fui apertado meu id é : " + id);
+}
 
 function getComments() {
   // console.log("aki" + $email);
@@ -51,7 +61,9 @@ function getComments() {
           "endereco </h4><p>" +
           resultado[i].endereco +
           "</p> " +
-          "</div>"
+          " <button onclick = 'deletar(" +
+          resultado[i].id +
+          ")' style= 'width:70px ; border-radius: 10px'> deletar </button> </div>"
       );
     }
   });

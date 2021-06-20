@@ -1,13 +1,14 @@
 <?php
 echo json_encode($_POST['nome']);
-header('Content-Type: application/json');
+
 
 $nome = $_POST['nome'];
 $telefone = $_POST['telefone'];
 $email = $_POST['email'];
 $endereco = $_POST['endereco'];
 
-$pdo = new PDO('mysql:host=localhost;  dbname=contato;', 'root',''); 
+header('Content-Type: application/json');
+$pdo = new PDO('mysql:host=localhost; dbname=contato;', 'root',''); 
 $stmt = $pdo->prepare('INSERT INTO contatos (nome,telefone,email,endereco) VALUES (:no,:tel:em:ende)');
 
 $stmt -> bindValue(':no', $nome );
