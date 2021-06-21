@@ -25,7 +25,7 @@ $("#form1").submit(function (e) {
     console.log(resultado);
     console.log(data);
     $(".box_comment").html("");
-    getComments();
+    exibir();
   });
 });
 function deletar(id) {
@@ -39,12 +39,12 @@ function deletar(id) {
   }).done(function (resultado, data) {
     console.log(resultado);
     console.log("resultado do deletar " + data);
-    exibirvazio();
+    exibir(id);
   });
 
   console.log("eu fui apertado meu id é : " + id);
 }
-function exibirvazio() {
+function exibir() {
   $.ajax({
     url: "https://localhost/projeto_agenda/exibir.php",
     method: "GET",
@@ -54,44 +54,7 @@ function exibirvazio() {
     if (resultado === "Nenhum comentário encontrado") {
       $(".box_comment").html('<div class="b_comm"><h4>' + resultado + "</h4>");
     } else {
-      for (var i = 0; i < resultado.length; i++) {
-        $(".box_comment").html(
-          '<div class="b_comm"><h4>' +
-            "Nome" +
-            "</h4><p>" +
-            resultado[i].nome +
-            "</p> <h4 >" +
-            " Telefone </h4><p>" +
-            resultado[i].telefone +
-            "</p> " +
-            " <h4 >" +
-            " Email </h4><p>" +
-            resultado[i].email +
-            "</p>" +
-            "<h4 >" +
-            "endereco </h4><p>" +
-            resultado[i].endereco +
-            "</p> " +
-            " <button onclick = 'deletar(" +
-            resultado[i].id +
-            ")' style= 'width:70px ; border-radius: 10px'> deletar </button> </div>"
-        );
-      }
-    }
-  });
-}
-
-function getComments() {
-  // console.log("aki" + $email);
-  $.ajax({
-    url: "https://localhost/projeto_agenda/exibir.php",
-    method: "GET",
-    dataType: "json",
-  }).done(function (resultado) {
-    console.log(resultado);
-    if (resultado === "Nenhum comentário encontrado") {
-      $(".box_comment").html('<div class="b_comm"><h4>' + resultado + "</h4>");
-    } else {
+      $(".box_comment").html("");
       for (var i = 0; i < resultado.length; i++) {
         $(".box_comment").prepend(
           '<div class="b_comm"><h4>' +
@@ -119,4 +82,4 @@ function getComments() {
   });
 }
 
-getComments();
+exibir();
