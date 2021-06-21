@@ -44,6 +44,35 @@ function deletar(id) {
 
   console.log("eu fui apertado meu id é : " + id);
 }
+function buscar(result) {
+  console.log("fuiii");
+  $(".box_comment").html("");
+  result.forEach(function (elemento) {
+    if (elemento.nome == $("#busca").val()) {
+      $(".box_comment").prepend(
+        " '<div class=b_comm> <h2>" +
+          "Pesquisa" +
+          "</h2><h4>" +
+          "Nome" +
+          "</h4><p>" +
+          elemento.nome +
+          "</p> <h4 >" +
+          " Telefone </h4><p>" +
+          elemento.telefone +
+          "</p> " +
+          " <h4 >" +
+          " Email </h4><p>" +
+          elemento.email +
+          "</p>" +
+          "<h4 >" +
+          "endereco </h4><p>" +
+          elemento.endereco +
+          "</p> </div>"
+      );
+      console.log(elemento.nome);
+    }
+  });
+}
 function exibir() {
   $.ajax({
     url: "https://localhost/projeto_agenda/exibir.php",
@@ -51,6 +80,7 @@ function exibir() {
     dataType: "json",
   }).done(function (resultado) {
     console.log(resultado);
+    // ou for ( i == 0)
     if (resultado === "Nenhum comentário encontrado") {
       $(".box_comment").html('<div class="b_comm"><h4>' + resultado + "</h4>");
     } else {
@@ -75,9 +105,13 @@ function exibir() {
             "</p> " +
             " <button onclick = 'deletar(" +
             resultado[i].id +
-            ")' style= 'width:70px ; border-radius: 10px'> deletar </button> </div>"
+            ")' style= 'width:70px ; border-radius: 10px ; cursor:pointer;'> deletar </button> </div>"
         );
       }
+      // $("#icone").click(buscar(resultado));
+      $("#icone").on("click", function () {
+        buscar(resultado);
+      });
     }
   });
 }

@@ -71,9 +71,11 @@ div.box_form > form > input.btn-sub {
 }
 
 div.box_form > form > input.btn-sub:hover {
-  transition: all 0.3s;
+  transition: all 1s;
   box-shadow: 5px 5px 4px #ccc;
-  opacity: 0.9;
+  color: red;
+  background-color: black;
+  opacity: 1;
 }
 
 .b_comm {
@@ -86,4 +88,12 @@ div.box_form > form > input.btn-sub:hover {
 
 .b_comm:nth-child(odd) {
   background-color: #ddd;
+}
+img#icone {
+  position: absolute;
+  margin-top: 8px;
+  margin-left: 20px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
 }

@@ -6,14 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>projeto agenda</title>
+  
     <link rel="stylesheet" href="style.css">
+ 
+    
 </head>
 <body>
 <section class="content">
 <div class="box_form">
 <h1>Agenda:</h1>
 
+
 <form  id ="form1"  action ="script.js" method="POST" name="formulario"  >
+<label for="busca">Buscar</label> <br>
+
+<input  id = "busca" type="text "  placeholder="buscar pelo nome">  <img id =icone  src= "icones.svg"> </img>
+
+</span>  <br><br>
 <label for="name">Nome</label><br>
 <input  id = "nome" type="text "  placeholder="nome"> <br><br>
 <label for="telefone">telefone</label><br>
