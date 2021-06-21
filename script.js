@@ -87,6 +87,21 @@ function buscar(result) {
 }
 
 function editar(id) {
+  console.log("-----------");
+
+  //$(".estado").val();
+
+  console.log($(".estado").val());
+  console.log("id: " + id);
+}
+
+/*
+  // prompt("digite ");
+  var nome = $("#nome").val();
+  var telefone = $("#tel").val();
+  var email = $("#email").val();
+  var endereco = $("#endereco").val();
+
   $.ajax({
     url: "https://localhost/projeto_agenda/deletar.php",
     method: "POST",
@@ -95,7 +110,8 @@ function editar(id) {
     },
     dataType: "json",
   }).done(function (resultado, data) {});
-}
+  */
+
 function exibir() {
   $.ajax({
     url: "https://localhost/projeto_agenda/exibir.php",
@@ -126,12 +142,18 @@ function exibir() {
             "endereco </h4><p>" +
             resultado[i].endereco +
             "</p> " +
-            " <button id = " +
-            "editar onclick = 'editar(" +
+            '<select  class= "estado";   onchange= "editar(' +
             resultado[i].id +
-            ")' > Editar </button>  <button id=deletar onclick = 'deletar(" +
+            ')" > ' +
+            "<option  selected >escolha um campo para editar</option>" +
+            '<option value="nome"  >Nome</option>' +
+            '<option value="telefone" >Telefone</option>' +
+            ' <option value="email">Email</option>' +
+            ' <option value="endereco">Endereco</option>' +
+            "</select>" +
+            '<button id=deletar onclick = "deletar(' +
             resultado[i].id +
-            ")'> deletar </button>  </div>"
+            ')"> deletar </button>  </div>'
         );
       }
       // $("#icone").click(buscar(resultado));

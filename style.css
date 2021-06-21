@@ -103,7 +103,18 @@ img#icone {
   height: 30px;
   border-radius: 8px;
   cursor: pointer;
-  left: 700px;
+  left: 600px;
   bottom: 50px;
   margin-right: 10px;
+}
+.box_comment > div.b_comm > .estado {
+  position: relative;
+  width: "160px";
+  height: "30px";
+  border-radius: 5px;
+  cursor: pointer;
+  left: 600px;
+  bottom: 50px;
+  margin-right: 10px;
+  font-weight: bold;
 }
