@@ -38,7 +38,7 @@ function deletar(id) {
     dataType: "json",
   }).done(function (resultado, data) {
     console.log(resultado);
-    console.log("resultado do deletar " + data);
+    console.log("resultado do deletar  " + data);
     exibir(id);
   });
 
