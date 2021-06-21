@@ -97,3 +97,13 @@ img#icone {
   width: 30px;
   cursor: pointer;
 }
+.box_comment > div.b_comm > button {
+  position: relative;
+  width: 100px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  left: 700px;
+  bottom: 50px;
+  margin-right: 10px;
+}

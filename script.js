@@ -45,8 +45,10 @@ function deletar(id) {
   console.log("eu fui apertado meu id é : " + id);
 }
 function buscar(result) {
-  console.log("fuiii");
+  var aux = false;
+  console.log("--------");
   $(".box_comment").html("");
+
   result.forEach(function (elemento) {
     if (elemento.nome == $("#busca").val()) {
       $(".box_comment").prepend(
@@ -69,9 +71,30 @@ function buscar(result) {
           elemento.endereco +
           "</p> </div>"
       );
+
       console.log(elemento.nome);
+      console.log("dentro do for " + aux);
+
+      aux = true;
+      console.log("dentro do for após " + aux);
     }
   });
+  if (aux == false) {
+    console.log("dentro do if " + aux);
+    alert("nao achei o contato");
+    aux = true;
+  }
+}
+
+function editar(id) {
+  $.ajax({
+    url: "https://localhost/projeto_agenda/deletar.php",
+    method: "POST",
+    data: {
+      ids: id,
+    },
+    dataType: "json",
+  }).done(function (resultado, data) {});
 }
 function exibir() {
   $.ajax({
@@ -81,7 +104,7 @@ function exibir() {
   }).done(function (resultado) {
     console.log(resultado);
     // ou for ( i == 0)
-    if (resultado === "Nenhum comentário encontrado") {
+    if (resultado === "Nenhum contato encontrado") {
       $(".box_comment").html('<div class="b_comm"><h4>' + resultado + "</h4>");
     } else {
       $(".box_comment").html("");
@@ -103,13 +126,17 @@ function exibir() {
             "endereco </h4><p>" +
             resultado[i].endereco +
             "</p> " +
-            " <button onclick = 'deletar(" +
+            " <button id = " +
+            "editar onclick = 'editar(" +
             resultado[i].id +
-            ")' style= 'width:70px ; border-radius: 10px ; cursor:pointer;'> deletar </button> </div>"
+            ")' > Editar </button>  <button id=deletar onclick = 'deletar(" +
+            resultado[i].id +
+            ")'> deletar </button>  </div>"
         );
       }
       // $("#icone").click(buscar(resultado));
       $("#icone").on("click", function () {
+        //prompt("digi");
         buscar(resultado);
       });
     }
