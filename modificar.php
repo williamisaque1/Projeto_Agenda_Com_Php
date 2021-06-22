@@ -16,7 +16,7 @@ $textoUsr = $_POST['textoUsr'] ;
 /*
 $telefone = $_POST['telefone'];
 $email = $_POST['email'];
-$endereco = $_POST['endereco'];
+$endereco = $_POST['endereco'] ;
 */
 //echo($nome);
 /*

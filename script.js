@@ -136,7 +136,7 @@ function editar(id) {
   var endereco = $("#endereco").val();
 
   $.ajax({
-    url: "https://localhost/projeto_agenda/deletar.php",
+    url: "https://localhost/projeto_agenda/deletar.php ",
     method: "POST",
     data: {
       ids: id,
