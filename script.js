@@ -90,10 +90,43 @@ function editar(id) {
   console.log("-----------");
 
   //$(".estado").val();
-
+  var textoUsr = prompt("digite o " + $(".estado").val());
   console.log($(".estado").val());
   console.log("id: " + id);
+  $.ajax({
+    url: "https://localhost/projeto_agenda/exibir.php",
+    method: "GET",
+    dataType: "json",
+  }).done(function (resultado) {
+    for (var i = 0; i < resultado.length; i++) {
+      if (resultado[i].id == id) {
+        console.log(resultado[i].id + " " + id + "ZZ" + i);
+        $.ajax({
+          url: "https://localhost/projeto_agenda/modificar.php",
+          method: "POST",
+          data: {
+            nome: resultado[i].nome,
+            telefone: resultado[i].telefone,
+            email: resultado[i].email,
+            endereco: resultado[i].endereco,
+            ids: resultado[i].id,
+            opcaoUsuario: $(".estado").val(),
+            textoUsr: textoUsr,
+          },
+          dataType: "json",
+        }).done(function (resultado, data) {
+          console.log("recebi algo " + resultado);
+        });
+      }
+    }
+  });
 }
+
+/*
+  $(".estado").change(function (acao) {
+    //prompt("digi");
+    editar(resultado[0].nome);
+    */
 
 /*
   // prompt("digite ");
@@ -156,7 +189,9 @@ function exibir() {
             ')"> deletar </button>  </div>'
         );
       }
+
       // $("#icone").click(buscar(resultado));
+
       $("#icone").on("click", function () {
         //prompt("digi");
         buscar(resultado);
