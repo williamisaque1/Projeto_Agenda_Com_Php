@@ -88,34 +88,45 @@ function buscar(result) {
 
 function editar(id) {
   console.log("-----------");
-
+  $("select.estado").change(function (u) {
+    console.log("evento acionado" + $("select.estado").val());
+  });
   //$(".estado").val();
   var textoUsr = prompt("digite o " + $(".estado").val());
   console.log($(".estado").val());
-  console.log("id: " + id);
+  console.log(
+    "id: " + id + "texto " + textoUsr + " op " + $("select.estado").val()
+  );
   $.ajax({
     url: "https://localhost/projeto_agenda/exibir.php",
     method: "GET",
     dataType: "json",
-  }).done(function (resultado) {
-    for (var i = 0; i < resultado.length; i++) {
-      if (resultado[i].id == id) {
-        console.log(resultado[i].id + " " + id + "ZZ" + i);
+  }).done(function (resultado1) {
+    for (let i = 0; i < resultado1.length; i++) {
+      if (resultado1[i].id == id) {
+        console.log(resultado1[i].id + " " + id + "ZZ" + i);
         $.ajax({
           url: "https://localhost/projeto_agenda/modificar.php",
           method: "POST",
           data: {
-            nome: resultado[i].nome,
-            telefone: resultado[i].telefone,
-            email: resultado[i].email,
-            endereco: resultado[i].endereco,
-            ids: resultado[i].id,
+            nome: resultado1[i].nome,
+            telefone: resultado1[i].telefone,
+            email: resultado1[i].email,
+            endereco: resultado1[i].endereco,
+            ids: resultado1[i].id,
             opcaoUsuario: $(".estado").val(),
             textoUsr: textoUsr,
           },
           dataType: "json",
-        }).done(function (resultado, data) {
-          console.log("recebi algo " + resultado);
+        }).done(function (resultado2, data) {
+          console.log(
+            resultado1[i].nome +
+              "recebi algo " +
+              resultado2 +
+              "||status " +
+              data
+          );
+          exibir();
         });
       }
     }
@@ -175,7 +186,7 @@ function exibir() {
             "endereco </h4><p>" +
             resultado[i].endereco +
             "</p> " +
-            '<select  class= "estado";   onchange= "editar(' +
+            '<select  class= "estado"; onchange= "editar(' +
             resultado[i].id +
             ')" > ' +
             "<option  selected >escolha um campo para editar</option>" +
