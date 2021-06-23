@@ -37,52 +37,44 @@ function deletar(id) {
     },
     dataType: "json",
   }).done(function (resultado, data) {
-    console.log(resultado);
-    console.log("resultado do deletar   " + data);
+    alert(`contato com o id ${id} deletado com sucesso`);
     exibir();
   });
-
-  console.log("eu fui apertado meu id é : " + id);
 }
 function buscar(result) {
-  var aux = false;
   console.log("--------");
   $(".box_comment").html("");
-
-  result.forEach(function (elemento) {
-    if (elemento.nome == $("#busca").val()) {
+  let aux = false;
+  console.log("este é o conteudo do result", result.length);
+  for (var i = 0; i < result.length; i++) {
+    console.log("este é o nome do result", result[i].id);
+    if (result[i].nome == $("#busca").val()) {
+      console.log("este e o i", i);
       $(".box_comment").prepend(
         " '<div class=b_comm> <h2>" +
           "Pesquisa" +
           "</h2><h4>" +
           "Nome" +
           "</h4><p>" +
-          elemento.nome +
+          result[i].nome +
           "</p> <h4 >" +
           " Telefone </h4><p>" +
-          elemento.telefone +
+          result[i].telefone +
           "</p> " +
           " <h4 >" +
           " Email </h4><p>" +
-          elemento.email +
+          result[i].email +
           "</p>" +
           "<h4 >" +
           "endereco </h4><p>" +
-          elemento.endereco +
+          result[i].endereco +
           "</p> </div>"
       );
-
-      console.log(elemento.nome);
-      console.log("dentro do for " + aux);
-
       aux = true;
-      console.log("dentro do for após " + aux);
     }
-  });
+  }
   if (aux == false) {
-    console.log("dentro do if " + aux);
     alert("nao achei o contato");
-    aux = true;
   }
 }
 
@@ -119,42 +111,13 @@ function editar(id) {
           },
           dataType: "json",
         }).done(function (resultado2, data) {
-          console.log(
-            resultado1[i].nome +
-              "recebi algo " +
-              resultado2 +
-              "||status " +
-              data
-          );
+          console.log(alert(resultado2));
           exibir();
         });
       }
     }
   });
 }
-
-/*
-  $(".estado").change(function (acao) {
-    //prompt("digi");
-    editar(resultado[0].nome);
-    */
-
-/*
-  // prompt("digite ");
-  var nome = $("#nome").val();
-  var telefone = $("#tel").val();
-  var email = $("#email").val();
-  var endereco = $("#endereco").val();
-
-  $.ajax({
-    url: "https://localhost/projeto_agenda/deletar.php ",
-    method: "POST",
-    data: {
-      ids: id,
-    },
-    dataType: "json",
-  }).done(function (resultado, data) {});
-  */
 
 function exibir() {
   $.ajax({
@@ -200,11 +163,7 @@ function exibir() {
             ')"> deletar </button>  </div>'
         );
       }
-
-      // $("#icone").click(buscar(resultado));
-
       $("#icone").on("click", function () {
-        //prompt("digi");
         buscar(resultado);
       });
     }
