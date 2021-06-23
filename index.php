@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>projeto agenda</title>
   
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/css/style.css">
  
     
 </head>
@@ -20,7 +20,7 @@
 <form  id ="form1"  action ="script.js" method="POST" name="formulario"  >
 <label for="busca">Buscar</label> <br>
 
-<input  id = "busca" type="text "  placeholder="buscar pelo nome">  <img id =icone  src= "icones.svg"> </img>
+<input  id = "busca" type="text "  placeholder="buscar pelo nome">  <img id =icone  src= "src/img/icones.svg"> </img>
 
 </span>  <br><br>
 <label for="name">Nome</label><br>
@@ -41,8 +41,9 @@
 </section>
 
 </body>
-<script src="jquery-3.5.1.min.js"></script>
 
-<script src= "script.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src= "src/js/script.js"> </script>
 
 </html>

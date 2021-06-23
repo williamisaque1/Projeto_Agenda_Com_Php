@@ -8,7 +8,7 @@ $("#form1").submit(function (e) {
     "resultado " + $nome + " " + $telefone + " " + $email + " " + $endereco
   );*/
   $.ajax({
-    url: "https://localhost/projeto_agenda/adicionar.php",
+    url: "https://localhost/projeto_agenda/src/controllers/adicionar.php",
     method: "POST",
     data: {
       nome: nome,
@@ -30,7 +30,7 @@ $("#form1").submit(function (e) {
 });
 function deletar(id) {
   $.ajax({
-    url: "https://localhost/projeto_agenda/deletar.php",
+    url: "https://localhost/projeto_agenda/src/controllers/deletar.php",
     method: "POST",
     data: {
       ids: id,
@@ -85,12 +85,8 @@ function editar(id) {
   });
   //$(".estado").val();
   var textoUsr = prompt("digite o " + $(".estado").val());
-  console.log($(".estado").val());
-  console.log(
-    "id: " + id + "texto " + textoUsr + " op " + $("select.estado").val()
-  );
   $.ajax({
-    url: "https://localhost/projeto_agenda/exibir.php",
+    url: "https://localhost/projeto_agenda/src/controllers/exibir.php",
     method: "GET",
     dataType: "json",
   }).done(function (resultado1) {
@@ -98,7 +94,7 @@ function editar(id) {
       if (resultado1[i].id == id) {
         console.log(resultado1[i].id + " " + id + "ZZ" + i);
         $.ajax({
-          url: "https://localhost/projeto_agenda/modificar.php",
+          url: "https://localhost/projeto_agenda/src/controllers/modificar.php",
           method: "POST",
           data: {
             nome: resultado1[i].nome,
@@ -121,7 +117,7 @@ function editar(id) {
 
 function exibir() {
   $.ajax({
-    url: "https://localhost/projeto_agenda/exibir.php",
+    url: "https://localhost/projeto_agenda/src/controllers/exibir.php",
     method: "GET",
     dataType: "json",
   }).done(function (resultado) {
